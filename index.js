@@ -40,7 +40,7 @@ module.exports = MiddlewareBase => class SPA extends MiddlewareBase {
           isStatic = re.test(route)
         } else if (options.spaAssetTestFs && route !== '/') {
           const fs = require('fs')
-          const filePath = path.join(root, route)
+          const filePath = path.join(root, require('url').parse(route).pathname)
           isStatic = fs.existsSync(filePath)
         } else {
           isStatic = /\./.test(route)
